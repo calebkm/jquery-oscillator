@@ -10,11 +10,11 @@ A super simple jQuery extension that oscillates integer values between a max and
 
 * **options** A hash of oscillator options.
 
-* **function** A Function to be called by the timer.
+* **function** A function to be called by the oscillator.
 
 ---
 
-## Usage
+## Example usage
 
 ```
 // Oscillate body opacity
@@ -22,4 +22,6 @@ A super simple jQuery extension that oscillates integer values between a max and
 var myOscillator = new $.oscillator({ min: 0, max: 100, speed: 50 }, function(){
   $('body').css({ opacity: myOscillator.value/100 });
 });
+
+// 
 ```
