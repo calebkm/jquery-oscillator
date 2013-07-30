@@ -14,7 +14,7 @@ A super simple jQuery extension that oscillates integer values between a max and
 
 ---
 
-## Example usage - Oscillating body opacity
+## Example - Oscillating body opacity
 
 ```
 // create new oscillator

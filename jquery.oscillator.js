@@ -46,9 +46,6 @@
 
 ;(function($){
   $.oscillator = function(options, func){
-  
-    // oscillator
-    var oscillator = this;
     
     // defaults
     this.defaults = {
@@ -58,7 +55,7 @@
       start: null, // initial value
       dir:   'up'  // initial increment direction: 'up' or 'down'
     };
-    
+        
     // merge options
     this.options = $.extend({}, this.defaults, options);
     
@@ -66,57 +63,61 @@
     this.value = this.options.start || this.options.min;
     this.dir   = this.options.dir;
     
-    // start/stop or toggle
+    // start
     this.start = function(){
-      if (!oscillator.interval){
-        oscillator.interval = setTimeout(timeOut, oscillator.options.speed);
-      }
+      if (!this.interval) newInterval();
     };
+    // stop
     this.stop = function(){
-      clearTimeout(oscillator.interval);
-      oscillator.interval = null;
+      clearTimeout(this.interval);
+      this.interval = null;
     };
+    // toggle start/stop
     this.toggle = function(){
-      if (!oscillator.interval){
-        oscillator.start();
-      } else {
-        oscillator.stop();
-      }
+      if (!this.interval) this.start();
+      else                this.stop();
     };
     
-    // start oscillator
-    oscillator.start();
+    // oscilltator
+    var osc = this;
+    
+    // begin oscillation
+    osc.start();
     
     
     /*-----------------------------------------------------------------
      *  helper functions
      *----------------------------------------------------------------*/
+    function newInterval(){
+      osc.interval = setTimeout(timeOut, osc.options.speed);
+    };
      
     function timeOut(){
-      oscillateValue();
-      oscillator.interval = setTimeout(timeOut, oscillator.options.speed);
+      callFunc();
+      updateValue();
+      newInterval();
     };
     
-    function oscillateValue(){
-      if (oscillator.dir == 'up'){
-        // increment value
-        oscillator.value++;
+    function updateValue(){
+      if (osc.dir == 'up'){
+        osc.value++;
         // if at max value, flip direction
-        if (oscillator.value >= oscillator.options.max){
-          oscillator.value = oscillator.options.max;
-          oscillator.dir   = 'down';
+        if (osc.value >= osc.options.max){
+          osc.value = osc.options.max;
+          osc.dir   = 'down';
         }
       } else {
-        // decrement value
-        oscillator.value--; 
+        osc.value--; 
         // if at min value, flip direction
-        if (oscillator.value <= oscillator.options.min){
-          oscillator.value = oscillator.options.min;
-          oscillator.dir   = 'up';
+        if (osc.value <= osc.options.min){
+          osc.value = osc.options.min;
+          osc.dir   = 'up';
         }
       } 
-      // call function, if given
-      if (typeof func == 'function') func();
     };
+    
+    function callFunc(){
+      if (typeof func == 'function') func();
+    }
   };
 })(jQuery);
