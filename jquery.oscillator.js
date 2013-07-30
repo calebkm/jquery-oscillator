@@ -66,7 +66,7 @@
     this.value = this.options.start || this.options.min;
     this.dir   = this.options.dir;
     
-    // start/stop
+    // start/stop or toggle
     this.start = function(){
       if (!oscillator.interval){
         oscillator.interval = setTimeout(timeOut, oscillator.options.speed);
@@ -75,6 +75,13 @@
     this.stop = function(){
       clearTimeout(oscillator.interval);
       oscillator.interval = null;
+    };
+    this.toggle = function(){
+      if (!oscillator.interval){
+        oscillator.start();
+      } else {
+        oscillator.stop();
+      }
     };
     
     // start oscillator

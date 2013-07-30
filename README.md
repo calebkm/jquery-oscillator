@@ -27,4 +27,7 @@ myOscillator.stop();
 
 // re-start
 myOscillator.start();
+
+// or toggle start/stop
+myOscillator.toggle();
 ```
