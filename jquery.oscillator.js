@@ -42,43 +42,43 @@
     // oscillator
     var oscillator = this;
     
-	  // defaults
-	  this.defaults = {
-		  min:   1,    // minimum value & starting value
-		  max:   100,  // maximum value
-		  speed: 1000, // increment speed
-		  dir:   'up'  // initial increment direction: 'up' or 'down'
-		};
-		
-		// merge options
-		this.options = $.extend({}, this.defaults, options);
-		
-		// oscillator value and direction
-		this.dir   = this.options.dir;
-		this.value = this.options.min;
-		
-		// start interval
-		var interval = setInterval(oscillate, oscillator.options.speed);
-		
-		// oscillation function
-		function oscillate(){
-			if (oscillator.dir == 'up'){
-			  // increment value
-			  oscillator.value++;
-			  // if at max value, flip direction
-			  if (oscillator.value >= oscillator.options.max){
-			    oscillator.dir = 'down';
-			  }
-			} else {
-			  // decrement value
-				oscillator.value--; 
-				// if at min value, flip direction
-				if (oscillator.value <= oscillator.options.min){
-				  oscillator.dir = 'up';
-				}
-			};
-			// call function, if given
-			if (typeof func == 'function') func();
-		};
-	};
+    // defaults
+    this.defaults = {
+      min:   1,    // minimum value & starting value
+      max:   100,  // maximum value
+      speed: 1000, // increment speed
+      dir:   'up'  // initial increment direction: 'up' or 'down'
+    };
+    
+    // merge options
+    this.options = $.extend({}, this.defaults, options);
+    
+    // oscillator value and direction
+    this.dir   = this.options.dir;
+    this.value = this.options.min;
+    
+    // start interval
+    var interval = setInterval(oscillate, oscillator.options.speed);
+    
+    // oscillation function
+    function oscillate(){
+      if (oscillator.dir == 'up'){
+        // increment value
+        oscillator.value++;
+        // if at max value, flip direction
+        if (oscillator.value >= oscillator.options.max){
+          oscillator.dir = 'down';
+        }
+      } else {
+        // decrement value
+        oscillator.value--; 
+        // if at min value, flip direction
+        if (oscillator.value <= oscillator.options.min){
+          oscillator.dir = 'up';
+        }
+      };
+      // call function, if given
+      if (typeof func == 'function') func();
+    };
+  };
 })(jQuery);
