@@ -28,17 +28,25 @@
  *
  * Example usage - oscillating body opacity:
  *  
+ * // create new oscillator
  * var myOscillator = new $.oscillator({ min: 0, max: 100, speed: 50 }, function(){
  *   $('body').css({ opacity: myOscillator.value/100 });
- * });
+ * })
  *
+ * // stop 
+ * myOscillator.stop();
  *
- *  See below for default options.
+ * // re-start
+ * myOscillator.start();
+ * 
+ *
+ * See below for default options.
  *
  */
 
 ;(function($){
   $.oscillator = function(options, func){
+  
     // oscillator
     var oscillator = this;
     
@@ -47,36 +55,59 @@
       min:   1,    // minimum value & starting value
       max:   100,  // maximum value
       speed: 1000, // increment speed
+      start: null, // initial value
       dir:   'up'  // initial increment direction: 'up' or 'down'
     };
     
     // merge options
     this.options = $.extend({}, this.defaults, options);
     
-    // oscillator value and direction
+    // initial value and direction
+    this.value = this.options.start || this.options.min;
     this.dir   = this.options.dir;
-    this.value = this.options.min;
     
-    // start interval
-    var interval = setInterval(oscillate, oscillator.options.speed);
+    // start/stop
+    this.start = function(){
+      if (!oscillator.interval){
+        oscillator.interval = setTimeout(timeOut, oscillator.options.speed);
+      }
+    };
+    this.stop = function(){
+      clearTimeout(oscillator.interval);
+      oscillator.interval = null;
+    };
     
-    // oscillation function
-    function oscillate(){
+    // start oscillator
+    oscillator.start();
+    
+    
+    /*-----------------------------------------------------------------
+     *  helper functions
+     *----------------------------------------------------------------*/
+     
+    function timeOut(){
+      oscillateValue();
+      oscillator.interval = setTimeout(timeOut, oscillator.options.speed);
+    };
+    
+    function oscillateValue(){
       if (oscillator.dir == 'up'){
         // increment value
         oscillator.value++;
         // if at max value, flip direction
         if (oscillator.value >= oscillator.options.max){
-          oscillator.dir = 'down';
+          oscillator.value = oscillator.options.max;
+          oscillator.dir   = 'down';
         }
       } else {
         // decrement value
         oscillator.value--; 
         // if at min value, flip direction
         if (oscillator.value <= oscillator.options.min){
-          oscillator.dir = 'up';
+          oscillator.value = oscillator.options.min;
+          oscillator.dir   = 'up';
         }
-      };
+      } 
       // call function, if given
       if (typeof func == 'function') func();
     };
