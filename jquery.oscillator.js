@@ -39,6 +39,9 @@
  * // re-start
  * myOscillator.start();
  * 
+ * // or toggle start/stop
+ * myOscillator.toggle();
+ *
  *
  * See below for default options.
  *
