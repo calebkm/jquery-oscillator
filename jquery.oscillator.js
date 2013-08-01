@@ -39,50 +39,49 @@
  * // re-start
  * myOscillator.start();
  * 
- * // or toggle start/stop
- * myOscillator.toggle();
- *
  *
  * See below for default options.
  *
  */
 
 ;(function($){
+
   $.oscillator = function(options, func){
     
     // defaults
-    this.defaults = {
+    var defaults = {
       min:   1,    // minimum value & starting value
       max:   100,  // maximum value
       speed: 1000, // increment speed
       start: null, // initial value
       dir:   'up'  // initial increment direction: 'up' or 'down'
     };
+    
+    // oscilltator
+    var osc = this;
         
     // merge options
-    this.options = $.extend({}, this.defaults, options);
+    var options = $.extend({}, defaults, options);
     
-    // initial value and direction
-    this.value = this.options.start || this.options.min;
-    this.dir   = this.options.dir;
+    // initial value
+    this.value = options.start || options.min;
     
     // start
     this.start = function(){
       if (!this.interval) newInterval();
     };
+    
     // stop
     this.stop = function(){
       clearTimeout(this.interval);
       this.interval = null;
     };
+    
     // toggle start/stop
     this.toggle = function(){
       if (!this.interval) this.start();
       else                this.stop();
     };
-    
-    // oscilltator
-    var osc = this;
     
     // begin oscillation
     osc.start();
@@ -91,8 +90,9 @@
     /*-----------------------------------------------------------------
      *  helper functions
      *----------------------------------------------------------------*/
+     
     function newInterval(){
-      osc.interval = setTimeout(timeOut, osc.options.speed);
+      osc.interval = setTimeout(timeOut, options.speed);
     };
      
     function timeOut(){
@@ -102,25 +102,27 @@
     };
     
     function updateValue(){
-      if (osc.dir == 'up'){
+      if (options.dir == 'up'){
         osc.value++;
         // if at max value, flip direction
-        if (osc.value >= osc.options.max){
-          osc.value = osc.options.max;
-          osc.dir   = 'down';
+        if (osc.value >= options.max){
+          osc.value = options.max;
+          options.dir = 'down';
         }
       } else {
         osc.value--; 
         // if at min value, flip direction
-        if (osc.value <= osc.options.min){
-          osc.value = osc.options.min;
-          osc.dir   = 'up';
+        if (osc.value <= options.min){
+          osc.value = options.min;
+          options.dir = 'up';
         }
       } 
     };
     
     function callFunc(){
       if (typeof func == 'function') func();
-    }
+    };
+    
   };
+  
 })(jQuery);
