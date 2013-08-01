@@ -1,6 +1,6 @@
 # jQuery Oscillator
 
-A super simple jQuery extension that oscillates integer values between a max and min.
+A super simple jQuery extension that oscillates integer values between a min and max.
 
 ---
 
