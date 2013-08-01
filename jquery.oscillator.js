@@ -1,5 +1,5 @@
 /**
- * jquery.oscillator.1.0.js
+ * jQuery Oscillator 1.0
  * A super simple jQuery extension that oscillates integer values between a max and min.
  * This plugin requires jQuery!
  *
@@ -25,6 +25,8 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  *
+ * http://opensource.org/licenses/MIT
+ *
  *
  * Example usage - oscillating body opacity:
  *  
@@ -49,48 +51,40 @@
   $.oscillator = function(options, func){
     
     // defaults
-    var defaults = {
+    var options = $.extend({
       min:   1,    // minimum value & starting value
       max:   100,  // maximum value
       speed: 1000, // increment speed
       start: null, // initial value
       dir:   'up'  // initial increment direction: 'up' or 'down'
-    };
+    }, options);
     
-    // oscilltator
+    // public methods
+    //----------------------------------------
     var osc = this;
-        
-    // merge options
-    var options = $.extend({}, defaults, options);
-    
-    // initial value
-    this.value = options.start || options.min;
-    
-    // start
-    this.start = function(){
-      if (!this.interval) newInterval();
+ 
+    osc.value = options.start || options.min; 
+
+    osc.start = function(){
+      if (!osc.interval) newInterval();
     };
     
-    // stop
-    this.stop = function(){
-      clearTimeout(this.interval);
-      this.interval = null;
+    osc.stop = function(){
+      clearTimeout(osc.interval);
+      osc.interval = null;
     };
     
-    // toggle start/stop
-    this.toggle = function(){
-      if (!this.interval) this.start();
-      else                this.stop();
+    osc.toggle = function(){
+      if (!osc.interval) osc.start();
+      else               osc.stop();
     };
     
     // begin oscillation
+    //----------------------------------------
     osc.start();
     
-    
-    /*-----------------------------------------------------------------
-     *  helper functions
-     *----------------------------------------------------------------*/
-     
+    // helper functions
+    //----------------------------------------
     function newInterval(){
       osc.interval = setTimeout(timeOut, options.speed);
     };
