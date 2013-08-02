@@ -34,13 +34,9 @@
  * var myOscillator = new $.oscillator({ min: 0, max: 100, speed: 50 }, function(){
  *   $('body').css({ opacity: myOscillator.value/100 });
  * })
- *
- * // stop 
- * myOscillator.stop();
- *
- * // re-start
- * myOscillator.start();
- * 
+ * myOscillator.stop();   // stop
+ * myOscillator.start();  // re-start
+ * myOscillator.toggle(); // or toggle start/stop
  *
  * See below for default options.
  *
@@ -52,12 +48,15 @@
     
     // defaults
     var options = $.extend({
-      min:   1,    // minimum value
+      min:   0,    // minimum value
       max:   100,  // maximum value
-      speed: 1000, // increment speed
+      speed: 10,   // seconds from min to max
       start: null, // initial value
       dir:   'up'  // initial increment direction: 'up' or 'down'
     }, options);
+    
+    // Timeout increment
+    var increment = (options.speed*1000)/(options.max-options.min-1);
     
     // public methods
     //----------------------------------------
@@ -87,8 +86,8 @@
     
     // helper functions
     //----------------------------------------
-    function newInterval(){
-      osc.interval = setTimeout(timeOut, options.speed);
+    function newInterval(){ 
+      osc.interval = setTimeout(timeOut, increment);
     };
      
     function timeOut(){
