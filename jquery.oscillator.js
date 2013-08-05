@@ -50,13 +50,10 @@
     var options = $.extend({
       min:   0,    // minimum value
       max:   100,  // maximum value
-      speed: 10,   // seconds from min to max
+      speed: 1000, // increment speed
       start: null, // initial value
       dir:   'up'  // initial increment direction: 'up' or 'down'
     }, options);
-    
-    // Timeout increment
-    var increment = (options.speed*1000)/(options.max-options.min-1);
     
     // public methods
     //----------------------------------------
@@ -87,7 +84,7 @@
     // helper functions
     //----------------------------------------
     function newInterval(){ 
-      osc.interval = setTimeout(timeOut, increment);
+      osc.interval = setTimeout(timeOut, options.speed);
     };
      
     function timeOut(){
