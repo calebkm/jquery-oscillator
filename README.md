@@ -18,11 +18,10 @@ Include script *after* the jQuery library (unless you are packaging scripts some
 
 ## Usage ##
 
-Let's say you want to continuously oscillate the opacity of the body of a webpage, let's create a new oscillator:
+Let's say you want to continuously oscillate the opacity of the body of a webpage, let's create a new oscillator and pass a function to update our body CSS:
 
 ```javascript
-// create a new oscillator
-var myOscillator = new $.oscillator({ min: 0, max: 100, speed: 50 }, function(){
+var myOscillator = new $.oscillator({ min: 0, max: 100, speed: 50 }, function() {
   $('body').css({ opacity: myOscillator.value/100 });
 });
 ```
@@ -48,6 +47,11 @@ myOscillator.toggle();
 To stop the oscillator and reset the options to the initial state:
 ```javascript
 myOscillator.stop();
+```
+
+At any point you can grab the current value of from the oscillator:
+```javascript
+myOscillator.value;
 ```
 
 ## Options ##
