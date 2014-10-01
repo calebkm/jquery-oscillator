@@ -53,9 +53,9 @@
       start:     true, // start the oscillation on init
       min:       0,    // minimum value
       max:       100,  // maximum value
-      speed:     1000, // increment speed
+      speed:     1000, // increment speed (ms)
       value:     null, // initial value
-      increment: 1,    // value to increment by
+      increment: 1,    // integer value to increment by
       direction: 'up'  // initial increment direction: 'up' or 'down'
     }, options);
 
