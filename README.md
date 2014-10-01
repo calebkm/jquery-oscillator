@@ -16,7 +16,7 @@ A super simple jQuery extension that oscillates integer values between a min and
 
 ## Example - Oscillating body opacity
 
-```
+```javascript
 // create new oscillator
 var myOscillator = new $.oscillator({ min: 0, max: 100, speed: 50 }, function(){
   $('body').css({ opacity: myOscillator.value/100 });
