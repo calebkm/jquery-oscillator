@@ -2,9 +2,8 @@
 
 A small jQuery extension that oscillates integer values incrementally between a min and max.
 
-## $.oscillator() ##
 
-#### $.oscillator([ options ],[ function ])
+## $.oscillator([ options ],[ function ]) ##
 
 * **options** Optional hash of defaults: min, max, speed, start & dir
 
@@ -14,12 +13,12 @@ A small jQuery extension that oscillates integer values incrementally between a 
 
 Include script *after* the jQuery library (unless you are packaging scripts somehow else):
 ```javascript
-  <script src="/path/to/jquery.oscillator.js"></script>
+<script src="/path/to/jquery.oscillator.js"></script>
 ```
 
 ## Usage ##
 
-Let's say you want to continuously oscillate the body opacity of your webpage:
+Let's say you want to continuously oscillate the opacity of the body of a webpage, let's create a new oscillator:
 
 ```javascript
 // create a new oscillator
@@ -28,7 +27,7 @@ var myOscillator = new $.oscillator({ min: 0, max: 100, speed: 50 }, function(){
 });
 ```
 
-By default the oscillator will start on init. To pause:
+By default, the oscillator will begin oscillating. To pause:
 
 ```javascript
 myOscillator.pause();
@@ -46,14 +45,14 @@ Or you can toggle between starting and pausing:
 myOscillator.toggle();
 ```
 
-To stop the oscillator and reset the value and direction to the initial state:
+To stop the oscillator and reset the options to the initial state:
 ```javascript
 myOscillator.stop();
 ```
 
 ## Options ##
 
-You can pass an optional hash of options, with the defaults set to:
+You can pass a hash of options, with the defaults set to:
 
 ```javascript
 options = {
