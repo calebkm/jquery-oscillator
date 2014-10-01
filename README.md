@@ -12,7 +12,7 @@ A small jQuery extension that oscillates integer values incrementally between a 
 ## Installation ##
 
 Include script *after* the jQuery library (unless you are packaging scripts somehow else):
-```javascript
+```html
 <script src="/path/to/jquery.oscillator.js"></script>
 ```
 
