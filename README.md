@@ -49,7 +49,7 @@ To stop the oscillator and reset the options to the initial state:
 myOscillator.stop();
 ```
 
-At any point you can grab the current value of from the oscillator:
+At any point you can grab the current value of the oscillator:
 ```javascript
 myOscillator.value;
 ```
