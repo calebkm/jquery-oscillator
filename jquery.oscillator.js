@@ -1,5 +1,5 @@
 /**
- * jQuery Oscillator 1.0 - http://www.calebkm.com/github/jquery-oscillator
+ * jQuery Oscillator 1.0 - http://www.github.com/calebkm/jquery-oscillator
  * A super simple jQuery extension that oscillates integer values between a min and max.
  * This plugin requires jQuery!
  *
